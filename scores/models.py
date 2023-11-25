@@ -28,7 +28,9 @@ class Score(models.Model):
 class AverageScore(models.Model):
     score = models.FloatField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     number = models.IntegerField(default=1)
-    post = models.ForeignKey("posts.Post", on_delete=models.CASCADE)
+    post = models.OneToOneField(
+        "posts.Post", related_name="average_score", on_delete=models.CASCADE
+    )
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
