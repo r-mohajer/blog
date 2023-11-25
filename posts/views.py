@@ -33,8 +33,8 @@ class PostViewSet(
 
     @action(
         detail=True,
-        methods=["post", "patch"],
-        url_path="score",
+        methods=["patch"],
+        url_path="edit-score",
         serializer_class=ScoreSerializer,
     )
     def update_score(self, request, *args, **kwargs):

@@ -16,8 +16,19 @@ class ScoreSerializer(serializers.ModelSerializer):
         data["post_id"] = int(self.context["request"].parser_context["kwargs"]["pk"])
         return data
 
-    def update(self, instance, validated_data):
-        score = ScoreService().get_score(
-            validated_data["user"].id, validated_data["post_id"]
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        ScoreService().add_score_to_average(
+            validated_data["post_id"], new_score=validated_data["score_number"]
         )
-        return super().update(score, validated_data)
+        return instance
+
+    def update(self, instance, validated_data):
+        post_id = validated_data["post_id"]
+        score = ScoreService().get_score(validated_data["user"].id, post_id)
+        old_score = score.score_number
+        new_instance = super().update(score, validated_data)
+        ScoreService().update_score_in_average(
+            post_id, old_score, new_score=validated_data["score_number"]
+        )
+        return new_instance
