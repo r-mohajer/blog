@@ -24,9 +24,18 @@ class PostViewSet(
 
     @action(
         detail=True,
+        methods=["post"],
+        url_path="score",
+        serializer_class=ScoreSerializer,
+    )
+    def create_score(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @action(
+        detail=True,
         methods=["post", "patch"],
         url_path="score",
         serializer_class=ScoreSerializer,
     )
-    def score(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+    def update_score(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
