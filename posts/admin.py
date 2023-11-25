@@ -1,3 +1,13 @@
 from django.contrib import admin
+from posts.models import Post
 
-# Register your models here.
+
+@admin.register(Post)
+class Post(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "author",
+        "content",
+        "created_at",
+        "updated_at",
+    )
