@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "posts",
     "scores",
     "drf_spectacular",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
