@@ -4,10 +4,12 @@ from posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Post
-        readonly_fields = (
-            "author",
+        read_only_fields = (
+            # "author",
             "created_at",
             "updated_at",
         )

@@ -4,6 +4,6 @@ from posts.views import PostViewSet
 
 app_name = "posts"
 posts_router = DefaultRouter()
-posts_router.register("calendars", PostViewSet, basename="calendars")
+posts_router.register("", PostViewSet, basename="posts")
 
 urlpatterns = posts_router.urls
